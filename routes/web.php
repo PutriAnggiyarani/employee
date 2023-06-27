@@ -16,16 +16,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
+// Route::get('home',[HomeController::class, 'index'])->name('home');
+
+// Route::get('profile', ProfileController::class)->name('profile');
+
+// Route::resource('employees',EmployeeController::class) ->middleware('auth');
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
-Route::get('home',[HomeController::class, 'index'])->name('home');
-
-Route::get('profile', ProfileController::class)->name('profile');
-
-Route::resource('employees',EmployeeController::class) ->middleware('auth');
+Route::redirect('/', '/login');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('profile', ProfileController::class)->name('profile');
+    Route::resource('employees', EmployeeController::class);
+});
+
