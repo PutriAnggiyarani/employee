@@ -40,7 +40,9 @@ class EmployeeSeeder extends Seeder
         //     ],
         // ]);
 
-        Employee::factory()->count(10)->create();
+        // Employee::factory()->count(10)->create();
+
+        Employee::factory()->count(200)->create();
     }
 }
 
